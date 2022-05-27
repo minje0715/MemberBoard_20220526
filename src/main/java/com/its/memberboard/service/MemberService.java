@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
+import java.util.List;
 
 @Service
 public class MemberService {
@@ -29,10 +30,25 @@ public class MemberService {
         String checkResult = memberRepository.duplicateCheck(memberId);
         System.out.println("checkResult ss= " + checkResult);
         if(checkResult == null ) {
-            System.out.println("checkResult ss22= " + checkResult);
             return "ok";
         }else {
             return "no";
         }
+    }
+
+    public List<MemberDTO> findAll() {
+       List<MemberDTO> memberDTOList = memberRepository.findAll();
+       return memberDTOList;
+    }
+
+    public boolean delete(Long id) {
+       int deleteMember = memberRepository.delete(id);
+        System.out.println("deleteMember = ss11" + deleteMember);
+       if(deleteMember > 0){
+           System.out.println("deleteMember = ss22" + deleteMember);
+           return true;
+       }else {
+           return false;
+       }
     }
 }
