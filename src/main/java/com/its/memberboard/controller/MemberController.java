@@ -85,4 +85,12 @@ public class MemberController {
         session.invalidate();
         return "index";
     }
+
+    @GetMapping("/detail")
+    public String findById(@RequestParam("id") Long id, Model model){
+      MemberDTO memberDTO = memberService.findById(id);
+      model.addAttribute("member", memberDTO);
+      return "memberPages/myPage";
+    }
 }
+

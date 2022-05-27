@@ -16,6 +16,7 @@
     [로그인 아이디] ${sessionScope.loginMemberId} <br/>
     [회원번호] ${sessionScope.loginId} <br/>
     <button><a href="/board/save">글작성</a></button>
-    <button><a href="/member/myPage">마이페이지</a></button>
+    <button><a href="/member/detail">마이페이지</a></button>
+    <button><a href="/member/logout">로그아웃</a></button>
 </body>
 </html>

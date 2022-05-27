@@ -12,43 +12,49 @@ import java.util.List;
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
+
     public boolean save(MemberDTO memberDTO) {
-      int saveResult =  memberRepository.save(memberDTO);
-      if(saveResult > 0) {
-          return true;
-      }else {
-          return false;
-      }
+        int saveResult = memberRepository.save(memberDTO);
+        if (saveResult > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public MemberDTO login(MemberDTO memberDTO) {
-      MemberDTO loginMember = memberRepository.login(memberDTO);
-      return loginMember;
+        MemberDTO loginMember = memberRepository.login(memberDTO);
+        return loginMember;
     }
 
     public String duplicateCheck(String memberId) {
         String checkResult = memberRepository.duplicateCheck(memberId);
         System.out.println("checkResult ss= " + checkResult);
-        if(checkResult == null ) {
+        if (checkResult == null) {
             return "ok";
-        }else {
+        } else {
             return "no";
         }
     }
 
     public List<MemberDTO> findAll() {
-       List<MemberDTO> memberDTOList = memberRepository.findAll();
-       return memberDTOList;
+        List<MemberDTO> memberDTOList = memberRepository.findAll();
+        return memberDTOList;
     }
 
     public boolean delete(Long id) {
-       int deleteMember = memberRepository.delete(id);
+        int deleteMember = memberRepository.delete(id);
         System.out.println("deleteMember = ss11" + deleteMember);
-       if(deleteMember > 0){
-           System.out.println("deleteMember = ss22" + deleteMember);
-           return true;
-       }else {
-           return false;
-       }
+        if (deleteMember > 0) {
+            System.out.println("deleteMember = ss22" + deleteMember);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public MemberDTO findById(Long id) {
+        MemberDTO memberDTO = memberRepository.findById(id);
+        return memberDTO;
     }
 }
