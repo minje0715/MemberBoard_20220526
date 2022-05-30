@@ -16,81 +16,107 @@ import java.util.List;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
     @GetMapping("/save")
     public String saveForm() {
         return "memberPages/save";
     }
+
     @PostMapping("/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
-     boolean saveResult =  memberService.save(memberDTO);
-     if(saveResult) {
+        boolean saveResult = memberService.save(memberDTO);
+        if (saveResult) {
 
-         return "index";
-     }else {
-         return "memberPages/save-fail";
-     }
+            return "index";
+        } else {
+            return "memberPages/save-fail";
+        }
     }
+
     @GetMapping("/login")
-    public String loginForm(){
+    public String loginForm() {
         return "memberPages/login";
     }
-    @PostMapping("/login")
-    public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
-    MemberDTO loginMember = memberService.login(memberDTO);
-    if(loginMember != null) {
-    if(loginMember.getMemberId().equals("admin"))
-        return "memberPages/admin";
-    else {
-        model.addAttribute("loginMember", loginMember);
-        session.setAttribute("loginMemberId", loginMember.getMemberId());
-        session.setAttribute("loginId", loginMember.getId());
-        return "memberPages/main";
-    }
-    }else {
-        return "memberPages/login-fail";
-    }
+
+    @PostMapping("/loginCheck")
+    public @ResponseBody String loginCheck(@RequestParam("memberId2") String memberId,
+                                           @RequestParam("memberPassword2") String memberPassword, HttpSession session) {
+        String loginCheck = memberService.loginCheck(memberId, memberPassword);
+        if (loginCheck == "ok") {
+            session.setAttribute("loginId", memberId);
+        }
+        return memberService.loginCheck(memberId, memberPassword);
     }
 
-    @PostMapping ("/duplicate-check")
+    @PostMapping("/duplicate-check")
     public @ResponseBody String duplicateCheck(@RequestParam("memberId") String memberId) {
-       String checkResult = memberService.duplicateCheck(memberId);
-       return checkResult;
+        String checkResult = memberService.duplicateCheck(memberId);
+        return checkResult;
 
     }
+
     @GetMapping("/admin")
-    public String admin(){
+    public String admin() {
         return "memberPages/admin";
     }
 
-    @GetMapping ("/findAll")
+    @GetMapping("/findAll")
     public String findAll(Model model) {
-      List<MemberDTO> memberDTOList = memberService.findAll();
-      model.addAttribute("memberList", memberDTOList);
-      return "memberPages/findAll";
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        model.addAttribute("memberList", memberDTOList);
+        return "memberPages/findAll";
     }
 
-    @GetMapping ("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id) {
-      boolean deleteResult =  memberService.delete(id);
-        System.out.println("deleteResult = cc11" + deleteResult);
-        if(deleteResult){
-            System.out.println("deleteResult = cc11" + deleteResult);
+        boolean deleteResult = memberService.delete(id);
+        if (deleteResult) {
             return "redirect:/member/findAll";
-        }else {
+        } else {
             return "delete-fail";
         }
     }
-    @GetMapping ("/logout")
-    public String logout(HttpSession session){
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
         session.invalidate();
         return "index";
     }
 
+    @GetMapping("/myPage")
+    public String findById(HttpSession session, Model model) {
+
+        MemberDTO memberDTO = memberService.findByMemberId((String)session.getAttribute("loginId"));
+        model.addAttribute("member", memberDTO);
+        return "memberPages/myPage";
+    }
+
     @GetMapping("/detail")
-    public String findById(@RequestParam("id") Long id, Model model){
-      MemberDTO memberDTO = memberService.findById(id);
-      model.addAttribute("member", memberDTO);
-      return "memberPages/myPage";
+    public String detail() {
+        return "memberPages/detail";
+    }
+
+    @PostMapping("/pwCheck")
+    public @ResponseBody boolean findByMemberId(@RequestParam("memberPassword1") String memberPassword,
+                                                @RequestParam("memberId1") String memberId) {
+        return memberService.findByMemberId(memberId, memberPassword);
+    }
+
+    @GetMapping("/updateForm")
+    public String updateForm(HttpSession session, Model model) {
+        Long updateId = (Long) session.getAttribute("loginId");
+        MemberDTO memberDTO = memberService.findById(updateId);
+        model.addAttribute("updateMember", memberDTO);
+        return "memberPages/update";
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+    boolean updateResult = memberService.update1(memberDTO);
+    if(updateResult){
+        return "memberPages/myPage";
+    }else{
+        return "memberPages/update-fail";
+    }
     }
 }
 

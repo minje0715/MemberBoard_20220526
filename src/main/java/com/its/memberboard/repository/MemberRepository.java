@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Repository
@@ -33,7 +34,31 @@ public class MemberRepository {
         return sql.delete("Member.delete", id);
     }
 
+
     public MemberDTO findById(Long id) {
-       return sql.selectOne("Member.findById", id);
+        return sql.selectOne("Member.findById", id);
+    }
+
+    public MemberDTO update(MemberDTO memberDTO) {
+       return sql.selectOne("Member.pwCheck", memberDTO);
+    }
+
+
+    public MemberDTO findByMemberId(String memberId) {
+       return sql.selectOne("Member.findByMemberId", memberId);
+    }
+
+
+
+    public MemberDTO loginCheck(String memberId) {
+       return sql.selectOne("Member.loginCheck", memberId);
+    }
+
+    public int update1(MemberDTO memberDTO) {
+        return sql.update("Member.update", memberDTO);
+    }
+
+    public MemberDTO checkId(String memberId) {
+       return sql.selectOne("Member.idCheck", memberId);
     }
 }

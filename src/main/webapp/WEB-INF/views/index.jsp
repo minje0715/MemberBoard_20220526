@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -9,12 +10,10 @@
 <html>
 <head>
     <title>Title</title>
-
+    <jsp:include page="layout/header.jsp" flush="false"></jsp:include>
 
 </head>
 <body>
-    <h2>index.jsp</h2>
-    <a href="/member/save">회원가입</a>
-    <a href="/member/login">로그인</a>
+
 </body>
 </html>

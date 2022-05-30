@@ -14,7 +14,27 @@
 </head>
 <body>
 <h2>myPage.jsp</h2>
-
-
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>핸드폰</th>
+            <th>회원정보수정</th>
+        </tr>
+            <tr>
+                <td>${member.id}</td>
+                <td>${member.memberId}</td>
+                <td>${member.memberPassword}</td>
+                <td>${member.memberName}</td>
+                <td>${member.memberEmail}</td>
+                <td>${member.memberPhone}</td>
+                <td><button><a href="/member/detail?id=${member.memberId}">수정</a></button></td>
+            </tr>
+    </table>
+</div>
 </body>
 </html>
