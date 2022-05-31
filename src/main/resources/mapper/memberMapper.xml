@@ -8,32 +8,24 @@
         insert into member_table(memberId, memberPassword, memberName, memberEmail, memberPhone)
 values (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, #{memberPhone})
     </insert>
-    <select id="login" parameterType="member" resultType="member">
-        select * from member_table where memberId=#{memberId} and memberPassword=#{memberPassword}
-    </select>
-    <select id="loginCheck" parameterType="String" resultType="member">
-        select * from member_table where memberId = #{memberId}
-    </select>
     <select id="duplicateCheck" parameterType="String" resultType="String">
         select memberId from member_table where memberId=#{memberId}
     </select>
-    <select id="findAll" resultType="member">
-        select * from member_table
+    <select id="login" parameterType="member" resultType="member">
+        select * from member_table where memberId=#{memberId}
     </select>
-    <delete id="delete" parameterType="Long">
-        delete from member_table where id=#{id}
-    </delete>
     <select id="findById" parameterType="Long" resultType="member">
         select * from member_table where id=#{id}
     </select>
-    <select id="findByMemberId" parameterType="String" resultType="member">
-        select * from member_table where memberid = #{memberId}
-    </select>
     <update id="update" parameterType="member">
-        update member_table set memberPassword =#{memberPassword},
-         memberPhone =#{memberPhone} where memberId=#{memberId}
+        update member_table set memberPhone =#{memberPhone} where id=#{id}
     </update>
-    <select id="idCheck" parameterType="String" resultType="member">
-        select * from member_table where memberId = #{memberId}
-    </select>
+
+<!--    <delete id="delete" parameterType="Long">-->
+<!--        delete from member_table where id=#{id}-->
+<!--    </delete>-->
+
+<!--    <select id="idCheck" parameterType="String" resultType="member">-->
+<!--        select * from member_table where memberId = #{memberId}-->
+<!--    </select>-->
 </mapper>

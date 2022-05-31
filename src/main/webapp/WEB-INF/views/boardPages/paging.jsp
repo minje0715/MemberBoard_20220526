@@ -9,15 +9,10 @@
 <html>
 <head>
     <title>Title</title>
+    <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 </head>
 <body>
-    <button onclick="findAll()">글목록</button>
 
-<script>
-    const findAll =() => {
-
-    }
-</script>
 </body>
 
 </html>

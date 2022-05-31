@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
 import java.util.List;
 
 @Controller
@@ -26,11 +25,16 @@ public class MemberController {
     public String save(@ModelAttribute MemberDTO memberDTO) {
         boolean saveResult = memberService.save(memberDTO);
         if (saveResult) {
-
             return "index";
         } else {
             return "memberPages/save-fail";
         }
+    }
+
+    @PostMapping("/duplicate-check")
+    public @ResponseBody String duplicateCheck(@RequestParam("memberId") String memberId) {
+        String checkResult = memberService.duplicateCheck(memberId);
+        return checkResult;
     }
 
     @GetMapping("/login")
@@ -38,42 +42,16 @@ public class MemberController {
         return "memberPages/login";
     }
 
-    @PostMapping("/loginCheck")
-    public @ResponseBody String loginCheck(@RequestParam("memberId2") String memberId,
-                                           @RequestParam("memberPassword2") String memberPassword, HttpSession session) {
-        String loginCheck = memberService.loginCheck(memberId, memberPassword);
-        if (loginCheck == "ok") {
-            session.setAttribute("loginId", memberId);
-        }
-        return memberService.loginCheck(memberId, memberPassword);
-    }
-
-    @PostMapping("/duplicate-check")
-    public @ResponseBody String duplicateCheck(@RequestParam("memberId") String memberId) {
-        String checkResult = memberService.duplicateCheck(memberId);
-        return checkResult;
-
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "memberPages/admin";
-    }
-
-    @GetMapping("/findAll")
-    public String findAll(Model model) {
-        List<MemberDTO> memberDTOList = memberService.findAll();
-        model.addAttribute("memberList", memberDTOList);
-        return "memberPages/findAll";
-    }
-
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id) {
-        boolean deleteResult = memberService.delete(id);
-        if (deleteResult) {
-            return "redirect:/member/findAll";
+    @PostMapping("/login")
+    public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
+        MemberDTO loginMember = memberService.login(memberDTO);
+        if (loginMember != null) {
+            model.addAttribute("loginMember", loginMember);
+            session.setAttribute("loginId", loginMember.getId());
+            session.setAttribute("loginMemberId", loginMember.getMemberId());
+            return "boardPages/list";
         } else {
-            return "delete-fail";
+            return "login-fail";
         }
     }
 
@@ -85,38 +63,43 @@ public class MemberController {
 
     @GetMapping("/myPage")
     public String findById(HttpSession session, Model model) {
-
-        MemberDTO memberDTO = memberService.findByMemberId((String)session.getAttribute("loginId"));
+        Long findByMember = (Long) session.getAttribute("loginId");
+        MemberDTO memberDTO = memberService.findById(findByMember);
         model.addAttribute("member", memberDTO);
         return "memberPages/myPage";
     }
 
-    @GetMapping("/detail")
-    public String detail() {
-        return "memberPages/detail";
-    }
-
-    @PostMapping("/pwCheck")
-    public @ResponseBody boolean findByMemberId(@RequestParam("memberPassword1") String memberPassword,
-                                                @RequestParam("memberId1") String memberId) {
-        return memberService.findByMemberId(memberId, memberPassword);
-    }
-
     @GetMapping("/updateForm")
     public String updateForm(HttpSession session, Model model) {
-        Long updateId = (Long) session.getAttribute("loginId");
+        long updateId = (Long) session.getAttribute("loginId");
         MemberDTO memberDTO = memberService.findById(updateId);
         model.addAttribute("updateMember", memberDTO);
         return "memberPages/update";
     }
+
     @PostMapping("/update")
-    public String update(@ModelAttribute MemberDTO memberDTO){
-    boolean updateResult = memberService.update1(memberDTO);
-    if(updateResult){
-        return "memberPages/myPage";
-    }else{
-        return "memberPages/update-fail";
-    }
+    public String update(@ModelAttribute MemberDTO memberDTO) {
+        System.out.println("dd");
+        boolean updateResult = memberService.update(memberDTO);
+        System.out.println("updateResult = " + updateResult);
+        if (updateResult) {
+            return "redirect:/member/myPage";
+        } else {
+            return "update-fail";
+        }
+
+
+//    @GetMapping("/delete")
+//    public String delete(@RequestParam("id") Long id) {
+//        boolean deleteResult = memberService.delete(id);
+//        if (deleteResult) {
+//            return "redirect:/member/findAll";
+//        } else {
+//            return "delete-fail";
+//        }
+//    }
+
     }
 }
+
 

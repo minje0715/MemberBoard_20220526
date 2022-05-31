@@ -32,7 +32,7 @@
                 <td>${member.memberName}</td>
                 <td>${member.memberEmail}</td>
                 <td>${member.memberPhone}</td>
-                <td><button><a href="/member/detail?id=${member.memberId}">수정</a></button></td>
+                <td><button><a href="/member/updateForm">수정</a></button></td>
             </tr>
     </table>
 </div>

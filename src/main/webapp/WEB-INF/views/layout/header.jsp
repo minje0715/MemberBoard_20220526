@@ -27,7 +27,9 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/board/boardList" class="nav-link px-2 text-secondary">메인화면</a></li>
+
+                <li><a href="/" class="nav-link px-2 text-secondary">메인화면</a></li>
+                <li><a href="/board/list" class="nav-link px-2 text-secondary">글목록</a></li>
                 <li><a href="/board/saveForm" class="nav-link px-2 text-white">글작성</a></li>
             </ul>
 
@@ -52,11 +54,11 @@
 </header>
 </body>
 <script>
-    const login = () => {
-        location.href = "/member/login";
-    }
     const save = () => {
         location.href = "/member/save";
+    }
+    const login = () => {
+        location.href = "/member/login";
     }
     const myPage = () => {
         location.href = "/member/myPage";

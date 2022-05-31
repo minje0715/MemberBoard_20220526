@@ -17,11 +17,12 @@
 
 <h2>save.jsp</h2>
 <form action="/member/save" method="post">
-    <input class="form-control mb-2" type="text" name="memberId" id="memberId" placeholder="아이디" onblur="duplicateCheck()">
+    <input class="form-control mb-2" type="text" name="memberId" id="memberId" placeholder="아이디" onblur="duplicateCheck()" required>
     <span id="id-check-result"></span>
-    <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호">
-    <input class="form-control mb-2" type="text" name="memberName" placeholder="이름">
-    <input class="form-control mb-2" type="text" name="memberEmail" placeholder="이메일">
+    <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호" required>
+    <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호확인" required>
+    <input class="form-control mb-2" type="text" name="memberName" placeholder="이름"required>
+    <input class="form-control mb-2" type="text" name="memberEmail" placeholder="이메일"required>
     <input class="form-control mb-2" type="tel" name="memberPhone"
            required pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" title="###-####-####" placeholder="전화번호">
     <input class="btn btn-primary" type="submit" value="가입">

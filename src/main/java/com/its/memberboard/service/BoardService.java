@@ -5,6 +5,8 @@ import com.its.memberboard.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BoardService {
     @Autowired
@@ -16,5 +18,15 @@ public class BoardService {
        }else {
            return false;
        }
+    }
+
+    public List<BoardDTO> findAll() {
+       return boardRepository.findAll();
+    }
+
+
+    public BoardDTO findById(Long bid) {
+        boardRepository.updateHits(bid);
+      return boardRepository.findById(bid);
     }
 }

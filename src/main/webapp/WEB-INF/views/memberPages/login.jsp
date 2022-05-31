@@ -72,45 +72,18 @@
 </head>
 <body>
 <h2>login.jsp</h2>
+    <form action="/member/login" method="post">
 <div class="input-box">
-<input type="text" id="memberId2" name="memberId" placeholder="아이디">
-    <label for="memberId2">아이디</label>
+<input type="text" id="" name="memberId" placeholder="아이디" required>
+    <label for="">아이디</label>
 </div>
 
 <div class="input-box">
-<input type="password" id="memberPassword2" name="memberPassword" placeholder="비밀번호">
-    <label for="memberPassword2">비밀번호</label>
+<input type="password" id="memberPassword" name="memberPassword" placeholder="비밀번호" required>
+    <label for="memberPassword">비밀번호</label>
 </div>
 
-<div id="idCheck"></div>
-
-<button onclick="memberId1()">확인</button>
-
-<script>
-    const memberId1 = () => {
-        const memberId2 = document.getElementById("memberId2").value;
-        const memberPassword2 = document.getElementById("memberPassword2").value;
-        const idCheck = document.getElementById("idCheck");
-        $.ajax({
-            type: "post",
-            url: "/member/loginCheck",
-            data: {"memberId2": memberId2, "memberPassword2": memberPassword2},
-            dataType: "text",
-            success: function (idCheckResult) {
-                if (idCheckResult == "ok") {
-                    alert("로그인이 성공합니다")
-                    location.href = "/"
-
-                } else {
-                    idCheck.innerHTML = "비밀번호를 확인해주세요";
-                    idCheck.style.color = "red";
-                }
-            },
-            error: function () {
-                alert("코드확인")
-            }
-        })
-    }
-</script>
+<button>로그인</button>
+</form>
 </body>
 </html>
