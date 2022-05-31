@@ -29,4 +29,6 @@ public class BoardService {
         boardRepository.updateHits(bid);
       return boardRepository.findById(bid);
     }
+
+
 }

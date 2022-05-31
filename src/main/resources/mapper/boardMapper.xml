@@ -11,7 +11,7 @@ values (#{boardTitle}, #{boardWriter}, #{boardContents}, now(), boardFileName)
     <select id="findAll" resultType="board">
         select * from board_table
     </select>
-    <select id="findById" parameterType="Long" resultType="member">
+    <select id="findById" parameterType="Long" resultType="board">
         select * from board_table where bid = #{bid}
     </select>
     <update id="updateHits" parameterType="Long">

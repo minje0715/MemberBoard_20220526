@@ -12,21 +12,38 @@
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <script src="/resources/js/jquery.js"></script>
+    <style>
+        button {
+            background-color: #8aa1a1;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            width: 100%;
+            height: 35px;
+            font-size: 14pt;
+            margin-top: 100px;
+        }
+        .width {
+            max-width: 700px;
+        }
+    </style>
 </head>
 <body>
 
-<h2>save.jsp</h2>
-<form action="/member/save" method="post">
-    <input class="form-control mb-2" type="text" name="memberId" id="memberId" placeholder="아이디" onblur="duplicateCheck()" required>
-    <span id="id-check-result"></span>
-    <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호" required>
-    <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호확인" required>
-    <input class="form-control mb-2" type="text" name="memberName" placeholder="이름"required>
-    <input class="form-control mb-2" type="text" name="memberEmail" placeholder="이메일"required>
-    <input class="form-control mb-2" type="tel" name="memberPhone"
-           required pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" title="###-####-####" placeholder="전화번호">
-    <input class="btn btn-primary" type="submit" value="가입">
-</form>
+<div class="width container mt-5">
+    <form action="/member/save" method="post">
+        <input class="form-control mb-2" type="text" name="memberId" id="memberId" placeholder="아이디"
+               onblur="duplicateCheck()" required>
+        <span id="id-check-result"></span>
+        <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호" required>
+        <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호확인" required>
+        <input class="form-control mb-2" type="text" name="memberName" placeholder="이름" required>
+        <input class="form-control mb-2" type="text" name="memberEmail" placeholder="이메일" required>
+        <input class="form-control mb-2" type="tel" name="memberPhone"
+               required pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" title="###-####-####" placeholder="전화번호">
+        <button>가입</button>
+    </form>
+</div>
 </body>
 <script>
     const duplicateCheck = () => {

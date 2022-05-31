@@ -25,7 +25,7 @@ public class MemberController {
     public String save(@ModelAttribute MemberDTO memberDTO) {
         boolean saveResult = memberService.save(memberDTO);
         if (saveResult) {
-            return "index";
+            return "boardPages/list";
         } else {
             return "memberPages/save-fail";
         }
@@ -54,6 +54,7 @@ public class MemberController {
             return "login-fail";
         }
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <style>
         header{
             display:flex;
@@ -72,7 +72,7 @@
 <body>
 <div class="container">
     <div class="py-5 text-center">
-<form action="/update" method="post" name="update">
+<form action="/member/update" method="post" name="update">
 
     <div class="input-box">
         <input type="text"  name="id" value="${updateMember.id}" readonly>

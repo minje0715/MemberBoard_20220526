@@ -12,56 +12,30 @@ import java.util.List;
 public class MemberRepository {
     @Autowired
     private SqlSessionTemplate sql;
+
     public int save(MemberDTO memberDTO) {
         return sql.insert("Member.save", memberDTO);
     }
+
     public String duplicateCheck(String memberId) {
         return sql.selectOne("Member.duplicateCheck", memberId);
     }
 
     public MemberDTO login(MemberDTO memberDTO) {
-       return sql.selectOne("Member.login", memberDTO);
+        return sql.selectOne("Member.login", memberDTO);
     }
 
     public MemberDTO findById(Long findByMember) {
-       return sql.selectOne("Member.findById", findByMember);
+        return sql.selectOne("Member.findById", findByMember);
     }
 
     public int update(MemberDTO memberDTO) {
-       return sql.update("Member.update", memberDTO);
+        return sql.update("Member.update", memberDTO);
     }
 
 
 //    public int delete(Long id) {
 //        System.out.println("id = rrr" + id);
 //        return sql.delete("Member.delete", id);
-//    }
-//
-//
-//    public MemberDTO findById(Long id) {
-//        return sql.selectOne("Member.findById", id);
-//    }
-//
-//    public MemberDTO update(MemberDTO memberDTO) {
-//       return sql.selectOne("Member.pwCheck", memberDTO);
-//    }
-//
-//
-//    public MemberDTO findByMemberId(String memberId) {
-//       return sql.selectOne("Member.findByMemberId", memberId);
-//    }
-//
-//
-//
-//    public MemberDTO loginCheck(String memberId) {
-//       return sql.selectOne("Member.loginCheck", memberId);
-//    }
-//
-//    public int update1(MemberDTO memberDTO) {
-//        return sql.update("Member.update", memberDTO);
-//    }
-//
-//    public MemberDTO checkId(String memberId) {
-//       return sql.selectOne("Member.idCheck", memberId);
 //    }
 }

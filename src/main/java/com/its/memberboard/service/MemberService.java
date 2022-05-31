@@ -60,46 +60,4 @@ public class MemberService {
 //            return false;
 //        }
 //    }
-//
-//
-//    public MemberDTO findById(Long id) {
-//       MemberDTO memberDTO = memberRepository.findById(id);
-//       return memberDTO;
-//    }
-//
-//
-//
-//    public MemberDTO pwCheck(MemberDTO memberDTO) {
-//        MemberDTO pwCheck = memberRepository.update(memberDTO);
-//        return pwCheck;
-//    }
-//
-//
-//    public boolean findByMemberId(String memberId, String memberPassword) {
-//      MemberDTO memberDTO = memberRepository.findByMemberId(memberId);
-//      if(memberDTO.getMemberPassword().equals(memberPassword)) {
-//          return true;
-//      }else {
-//          return false;
-//      }
-//    }
-//
-//    public MemberDTO findByMemberId(String memberId) {
-//    return memberRepository.findByMemberId(memberId);
-//
-//    }
-//
-//    public boolean update1(MemberDTO memberDTO) {
-//    int updateResult = memberRepository.update1(memberDTO);
-//    if(updateResult > 0){
-//        return true;
-//    }else {
-//        return false;
-//    }
-//    }
-//
-//    public MemberDTO checkId(String memberId) {
-//      MemberDTO memberDTO = memberRepository.checkId(memberId);
-//      return memberDTO;
-//    }
 }
