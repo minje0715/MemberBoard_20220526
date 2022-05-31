@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BoardRepository {
@@ -33,5 +34,17 @@ public class BoardRepository {
 
     public void delete(Long bid) {
         sql.delete("Board.delete", bid);
+    }
+
+    public int boardCount() {
+        return sql.selectOne("Board.count");
+    }
+
+    public List<BoardDTO> pagingList(Map<String, Integer> pagingParam) {
+        return sql.selectList("Board.pagingList", pagingParam);
+    }
+
+    public List<BoardDTO> search(Map<String, String> searchParam) {
+        return sql.selectList("Board.search", searchParam);
     }
 }

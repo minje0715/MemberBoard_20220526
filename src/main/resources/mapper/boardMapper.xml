@@ -27,5 +27,14 @@ values (#{boardTitle}, #{boardWriter}, #{boardContents}, now(), boardFileName)
     <delete id="delete" parameterType="Long">
         delete from board_table where bid=#{bid}
     </delete>
+    <select id="count" resultType="int">
+        select count(bid) from board_table
+    </select>
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="board">
+        select * from board_table order by bid desc limit #{start}, #{limit}
+    </select>
+    <select id="search" parameterType="java.util.HashMap" resultType="board">
+        select * from board_table where ${type} like concat('%', #{q}, '%') order by  bid desc;
+    </select>
 
 </mapper>

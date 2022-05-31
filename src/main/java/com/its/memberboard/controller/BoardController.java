@@ -2,6 +2,7 @@ package com.its.memberboard.controller;
 
 import com.its.memberboard.dto.BoardDTO;
 import com.its.memberboard.dto.MemberDTO;
+import com.its.memberboard.dto.PageDTO;
 import com.its.memberboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,9 +37,9 @@ public class BoardController {
     public String findAll(Model model ,@RequestParam(value="page", required = false,
     defaultValue = "1") int page) {
         List<BoardDTO> boardDTOList = boardService.findAll();
-        PageDTO
+        PageDTO paging = boardService.paging(page);
         model.addAttribute("boardList", boardDTOList);
-
+        model.addAttribute("paging", paging);
         return "boardPages/list";
     }
 
@@ -66,4 +67,11 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    @GetMapping ("/search")
+    public String search(@RequestParam("searchType") String searchType,
+                         @RequestParam("q") String q, Model model) {
+    List<BoardDTO> searchList = boardService.search(searchType, q);
+    model.addAttribute("boardList", searchList);
+    return "boardPages/list";
+    }
 }
