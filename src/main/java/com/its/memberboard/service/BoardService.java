@@ -31,4 +31,12 @@ public class BoardService {
     }
 
 
+    public void update(BoardDTO boardDTO) {
+        System.out.println("Service boardDTO = " + boardDTO);
+      boardRepository.update(boardDTO);
+    }
+
+    public void delete(Long bid) {
+        boardRepository.delete(bid);
+    }
 }

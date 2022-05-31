@@ -33,10 +33,13 @@ public class BoardController {
     }
 
     @GetMapping("/list") // 헤더 -> 글목록
-    public String findAll(Model model) {
+    public String findAll(Model model ,@RequestParam(value="page", required = false,
+    defaultValue = "1") int page) {
         List<BoardDTO> boardDTOList = boardService.findAll();
+        PageDTO
         model.addAttribute("boardList", boardDTOList);
-        return "/boardPages/list";
+
+        return "boardPages/list";
     }
 
     @GetMapping("/detail")
@@ -51,4 +54,16 @@ public class BoardController {
        model.addAttribute("boardUpdate", boardDTO);
        return "boardPages/update";
     }
+    @PostMapping ("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO) {
+        System.out.println("boardDTO = " + boardDTO);
+        boardService.update(boardDTO);
+        return "redirect:/board/list";
+    }
+    @GetMapping ("/delete")
+    public String delete(@RequestParam("id")Long bid){
+        boardService.delete(bid);
+        return "redirect:/board/list";
+    }
+
 }

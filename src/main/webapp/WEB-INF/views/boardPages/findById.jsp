@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
+<jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
     <table class="table">
         <tr>
@@ -35,8 +36,8 @@
 </div>
 <div class="text-center">
 <c:choose>
-    <c:when test="${sessionScope.loginId != null}">
-        <button onclick="boardUpdate()" class="btn btn-primary">수정</button> &nbsp;
+    <c:when test="${sessionScope.loginMemberId eq board.boardWriter}">
+        <button onclick="boardUpdate()" class="btn btn-primary">수정</button>
         <button onclick="list()" class="btn btn-dark">글목록</button>
         <button onclick="boardDelete()" class="btn btn-danger">삭제</button>
     </c:when>

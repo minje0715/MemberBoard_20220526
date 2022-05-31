@@ -49,7 +49,8 @@ public class MemberController {
             model.addAttribute("loginMember", loginMember);
             session.setAttribute("loginId", loginMember.getId());
             session.setAttribute("loginMemberId", loginMember.getMemberId());
-            return "boardPages/list";
+            session.setAttribute("loginMemberPassword", loginMember.getMemberPassword());
+            return "redirect:/board/list";
         } else {
             return "login-fail";
         }
@@ -59,7 +60,7 @@ public class MemberController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "index";
+        return "boardPages/list";
     }
 
     @GetMapping("/myPage")
@@ -88,19 +89,19 @@ public class MemberController {
         } else {
             return "update-fail";
         }
-
-
-//    @GetMapping("/delete")
-//    public String delete(@RequestParam("id") Long id) {
-//        boolean deleteResult = memberService.delete(id);
-//        if (deleteResult) {
-//            return "redirect:/member/findAll";
-//        } else {
-//            return "delete-fail";
-//        }
-//    }
-
     }
+    @GetMapping ("/memberList")
+    public String findAll(Model model) {
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        model.addAttribute("memberList", memberDTOList);
+        return "memberPages/findAll";
+    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id){
+        memberService.delete(id);
+        return "redirect:/member/memberList";
+    }
+
 }
 
 

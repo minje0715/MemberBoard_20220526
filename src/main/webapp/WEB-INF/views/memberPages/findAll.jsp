@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
-<h2>회원목록</h2>
+<jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
+<h2>회원목록</h2>
     <table class="table">
         <tr>
             <th>id</th>
@@ -33,7 +34,7 @@
                 <td>${member.memberName}</td>
                 <td>${member.memberEmail}</td>
                 <td>${member.memberPhone}</td>
-                <td><button><a href="/member/delete?id=${member.id}">삭제</a></button></td>
+                <td><a href="/member/delete?id=${member.id}">삭제</a></td>
             </tr>
         </c:forEach>
     </table>

@@ -85,8 +85,8 @@
 <div class="width container mt-5">
 <form action="/member/login" method="post">
     <div class="input-box">
-        <input type="text" id="" name="memberId" placeholder="아이디" required>
-        <label for="">아이디</label>
+        <input type="text" id="memberId" name="memberId" placeholder="아이디" required>
+        <label for="memberId">아이디</label>
     </div>
     <div class="input-box">
         <input type="password" id="memberPassword" name="memberPassword" placeholder="비밀번호" required>
@@ -95,6 +95,5 @@
     <button>로그인</button>
 </form>
 </div>
-
 </body>
 </html>

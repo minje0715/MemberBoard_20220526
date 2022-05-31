@@ -64,7 +64,7 @@
                     idCheck.innerHTML = "사용중인 아이디입니다";
                     idCheck.style.color = "red";
                 }
-                alert("아이디 중복체크 성공!!");
+                alert("아이디 중복체크 중입니다.....);
             },
             error: function () {
                 alert("오타체크");

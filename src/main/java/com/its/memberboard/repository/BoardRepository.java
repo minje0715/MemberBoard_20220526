@@ -25,4 +25,13 @@ public class BoardRepository {
     public BoardDTO findById(Long bid) {
         return sql.selectOne("Board.findById", bid);
     }
+
+    public void update(BoardDTO boardDTO) {
+        System.out.println("Repository boardDTO = " + boardDTO);
+        sql.update("Board.update", boardDTO);
+    }
+
+    public void delete(Long bid) {
+        sql.delete("Board.delete", bid);
+    }
 }

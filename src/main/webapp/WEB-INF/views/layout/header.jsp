@@ -34,6 +34,11 @@
                 <button onclick="boardList()" type="button" class="btn btn-outline-light me-2">글목록</button>
                 <button onclick="save1(${sessionScope.loginId})" type="button" class="btn btn-outline-light me-2">글작성
                 </button>
+                <c:choose>
+                    <c:when test="${sessionScope.loginMemberId eq 'admin'}">
+                        <button onclick="findId()" type="button" class="btn btn-outline-light me-2">회원목록</button>
+                    </c:when>
+                </c:choose>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -63,6 +68,9 @@
     }
     const login = () => {
         location.href = "/member/login";
+    }
+    const findId = () => {
+        location.href = "/member/memberList";
     }
     const myPage = () => {
         location.href = "/member/myPage";

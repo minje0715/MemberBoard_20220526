@@ -49,15 +49,12 @@ public class MemberService {
        }
     }
 
+    public List<MemberDTO> findAll() {
+       return memberRepository.findAll();
+    }
 
-//    public boolean delete(Long id) {
-//        int deleteMember = memberRepository.delete(id);
-//        System.out.println("deleteMember = ss11" + deleteMember);
-//        if (deleteMember > 0) {
-//            System.out.println("deleteMember = ss22" + deleteMember);
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    public void delete(Long id) {
+        memberRepository.delete(id);
+    }
+
 }

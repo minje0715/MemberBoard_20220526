@@ -23,7 +23,7 @@
             <th>내용</th>
             <th>조회수</th>
             <th>작성시간</th>
-            <th>회원삭제</th>
+
         </tr>
         <c:forEach items="${boardList}" var="board">
             <tr>
