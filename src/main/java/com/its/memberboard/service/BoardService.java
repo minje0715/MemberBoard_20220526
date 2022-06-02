@@ -23,10 +23,6 @@ public class BoardService {
        }
     }
 
-    public List<BoardDTO> findAll() {
-       return boardRepository.findAll();
-    }
-
 
     public BoardDTO findById(Long bid) {
         boardRepository.updateHits(bid);

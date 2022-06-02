@@ -9,6 +9,6 @@
 value (#{commentWriter}, #{commentContents}, now(), #{bid})
 </insert>
     <select id="findAll" parameterType="Long" resultType="comment">
-        select * from comment_table where bid=#{bid} order by id desc;
+        select * from comment_table where bid=#{bid} order by bid desc;
     </select>
 </mapper>

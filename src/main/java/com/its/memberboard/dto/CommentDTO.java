@@ -10,5 +10,5 @@ public class CommentDTO {
     private Long bid;
     private String commentWriter;
     private String commentContents;
-    private Timestamp commentCreateDate;
+    private Timestamp commentCreatedDate;
 }

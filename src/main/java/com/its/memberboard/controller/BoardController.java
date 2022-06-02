@@ -4,6 +4,7 @@ import com.its.memberboard.dto.BoardDTO;
 import com.its.memberboard.dto.MemberDTO;
 import com.its.memberboard.dto.PageDTO;
 import com.its.memberboard.service.BoardService;
+import com.its.memberboard.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,9 @@ import java.util.List;
 public class BoardController {
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/saveForm")
     public String saveForm() {
@@ -34,9 +38,9 @@ public class BoardController {
     }
 
     @GetMapping("/list") // 헤더 -> 글목록
-    public String findAll(Model model ,@RequestParam(value="page", required = false,
-    defaultValue = "1") int page) {
-        List<BoardDTO> boardDTOList = boardService.findAll();
+    public String findAll(Model model,@RequestParam(value="page", required = false,
+            defaultValue = "1") int page) {
+        List<BoardDTO> boardDTOList = boardService.pagingList(page);
         PageDTO paging = boardService.paging(page);
         model.addAttribute("boardList", boardDTOList);
         model.addAttribute("paging", paging);
@@ -44,9 +48,12 @@ public class BoardController {
     }
 
     @GetMapping("/detail")
-    public String findById(@RequestParam("id") Long bid, Model model) {
+    public String findById(@RequestParam("id") Long bid, Model model, @RequestParam(value="page", required = false,
+            defaultValue = "1") int page) {
        BoardDTO boardDTO = boardService.findById(bid);
+       model.addAttribute("page", page);
        model.addAttribute("board", boardDTO);
+       model.addAttribute("commentList", commentService.findAll(bid));
        return "boardPages/findById";
     }
     @GetMapping ("/update")
