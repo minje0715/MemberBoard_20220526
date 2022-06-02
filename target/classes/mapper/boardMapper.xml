@@ -8,9 +8,7 @@
         insert into board_table (boardTitle, boardWriter, boardContents, boardCreatedDate, boardFileName)
 values (#{boardTitle}, #{boardWriter}, #{boardContents}, now(), boardFileName)
     </insert>
-    <select id="findAll" resultType="board">
-        select * from board_table order by bid desc;
-    </select>
+
     <select id="findById" parameterType="Long" resultType="board">
         select * from board_table where bid = #{bid}
     </select>

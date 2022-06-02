@@ -18,7 +18,7 @@
 <h2>회원목록</h2>
     <table class="table">
         <tr>
-            <th>id</th>
+            <th>회원번호</th>
             <th>아이디</th>
             <th>비밀번호</th>
             <th>이름</th>

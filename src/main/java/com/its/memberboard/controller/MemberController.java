@@ -60,7 +60,7 @@ public class MemberController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/boardPages/list";
+        return "redirect:/board/list";
     }
 
     @GetMapping("/myPage")
